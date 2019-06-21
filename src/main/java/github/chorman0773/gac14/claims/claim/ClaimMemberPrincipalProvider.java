@@ -21,7 +21,7 @@ public final class ClaimMemberPrincipalProvider implements IPrincipalProvider {
 	public int getSize(IPrincipal arg0) {
 		ClaimMemberPrincipal principal = (ClaimMemberPrincipal)arg0;
 		IPrincipalProvider provider = principal.getBase().getProvider();
-		return 2+provider.getProviderName().toString().length()+provider.getSize(principal.getBase())+2+principal.getPermissionLevel().getName().toString().length();
+		return 2+provider.getProviderName().toString().length()+4+provider.getSize(principal.getBase())+2+principal.getPermissionLevel().getName().toString().length();
 	}
 
 	@Override
@@ -43,9 +43,8 @@ public final class ClaimMemberPrincipalProvider implements IPrincipalProvider {
 
 	@Override
 	public int store(IPrincipal arg0, DataOutputStream arg1) throws IOException {
-		ClaimMemberPrincipal principal = (ClaimMemberPrincipal)arg0;
-		
-		
+		//FIXME Figure out how to implement this
+		return -1;
 	}
 
 }

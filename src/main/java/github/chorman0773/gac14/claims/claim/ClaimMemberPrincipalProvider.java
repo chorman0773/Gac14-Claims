@@ -26,6 +26,7 @@ public final class ClaimMemberPrincipalProvider implements IPrincipalProvider {
 
 	@Override
 	public IPrincipal load(DataInputStream arg0) throws IOException {
+		arg0.readUnsignedShort();
 		IPrincipal inner = WorldguardRegistries.readPrincipal(arg0);
 		if(!(inner instanceof IClaimOwner))
 			throw new IOException("Failed to load Principal. Inner Principal is not a ClaimOwner");
@@ -37,14 +38,19 @@ public final class ClaimMemberPrincipalProvider implements IPrincipalProvider {
 
 	@Override
 	public IPrincipal resolve(String arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int store(IPrincipal arg0, DataOutputStream arg1) throws IOException {
-		//FIXME Figure out how to implement this
-		return -1;
+		ClaimMemberPrincipal principal = (ClaimMemberPrincipal)arg0;
+		IPrincipal root = principal.getBase();
+		int sz = getSize(arg0);
+		arg1.writeUTF(getProviderName().toString());
+		arg1.writeShort(sz);
+		root.store(arg1);
+		arg1.writeUTF(principal.getPermissionLevel().getName().toString());
+		return sz;
 	}
 
 }

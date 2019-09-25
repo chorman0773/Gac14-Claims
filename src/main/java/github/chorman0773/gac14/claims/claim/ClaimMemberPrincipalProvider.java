@@ -14,7 +14,7 @@ public final class ClaimMemberPrincipalProvider implements IPrincipalProvider {
 	@Override
 	public ResourceLocation getProviderName() {
 		// TODO Auto-generated method stub
-		return ResourceLocation.makeResourceLocation("gac14:claims/member");
+		return new ResourceLocation("gac14:claims/member");
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public final class ClaimMemberPrincipalProvider implements IPrincipalProvider {
 		if(!(inner instanceof IClaimOwner))
 			throw new IOException("Failed to load Principal. Inner Principal is not a ClaimOwner");
 		IClaimOwner owner = (IClaimOwner)inner;
-		ResourceLocation levelName = ResourceLocation.makeResourceLocation(arg0.readUTF());
+		ResourceLocation levelName = new ResourceLocation(arg0.readUTF());
 		IClaimPermissionLevel<?> level = PermissionLevelManager.levels.get(levelName);
 		return new ClaimMemberPrincipal(this,owner,level);
 	}
